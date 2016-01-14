@@ -10,12 +10,12 @@ This module provides a Python API for interfacing with the asterisk manager.
    import sys
 
    def handle_shutdown(event, manager):
-      print "Recieved shutdown event"
+      print "Received shutdown event"
       manager.close()
-      # we could analize the event and reconnect here
+      # we could analyze the event and reconnect here
 
    def handle_event(event, manager):
-      print "Recieved event: %s" % event.name
+      print "Received event: %s" % event.name
 
    manager = asterisk.manager.Manager()
    try:
@@ -658,7 +658,31 @@ class Manager(object):
         cdict['Module'] = module
         response = self.send_action(cdict)
         return response
+    
+    def bridge_list(self, bridgetype="base"):
+        """ Causes Asterisk to generate a series of bridge list events """
+        cdict = {'Action': 'BridgeList'}
+        #cdict['BridgeType'] = bridgetype
+        response = self.send_action(cdict)
+        return response
 
+    def bridge_info(self, bridgeuniqueid=""):
+        """ Returns information about a bridge """
+        cdict = {'Action': 'BridgeInfo'}
+        cdict['BridgeUniqueid'] = bridgeuniqueid
+        response = self.send_action(cdict)
+        return response
+    
+    def confbridge_list_rooms(self):
+        cdict = {'Action': 'ConfbridgeListRooms'}
+        response = self.send_action(cdict)
+        return response
+
+    def confbridge_list(self, conference=0):
+        cdict = {'Action': 'ConfbridgeList'}
+        cdict['Conference'] = conference
+        response = self.send_action(cdict)
+        return response
 
 class ManagerException(Exception):
     pass
