@@ -684,6 +684,20 @@ class Manager(object):
         response = self.send_action(cdict)
         return response
 
+    def confbridge_kick(self, conference, channel):
+        cdict = {'Action': 'ConfbridgeKick'}
+        cdict['Conference'] = conference
+        cdict['Channel'] = channel
+        response = self.send_action(cdict)
+        return response
+
+    def confbridge_unmute(self, conference, channel):
+        cdict = {'Action': 'ConfbridgeUnmute'}
+        cdict['Conference'] = conference
+        cdict['Channel'] = channel
+        response = self.send_action(cdict)
+        return response
+
 class ManagerException(Exception):
     pass
 
