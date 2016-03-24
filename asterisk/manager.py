@@ -709,6 +709,8 @@ many phones, causing them to check/reload their provisioning. """
         cdict = {'Action': 'SIPnotify'}
         cdict['Channel']  = channel
         cdict['Variable'] = variable
+        response = self.send_action(cdict)
+        return response
 
 class ManagerException(Exception):
     pass
