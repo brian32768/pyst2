@@ -667,24 +667,29 @@ class Manager(object):
         return response
 
     def bridge_info(self, bridgeuniqueid=""):
-        """ Returns information about a bridge """
+        """ Returns information about a bridge. """
         cdict = {'Action': 'BridgeInfo'}
         cdict['BridgeUniqueid'] = bridgeuniqueid
         response = self.send_action(cdict)
         return response
     
     def confbridge_list_rooms(self):
+        """ Request a list of conference rooms. """
         cdict = {'Action': 'ConfbridgeListRooms'}
         response = self.send_action(cdict)
         return response
 
     def confbridge_list(self, conference=0):
+        """ Request a list of members in a conference room. """
         cdict = {'Action': 'ConfbridgeList'}
         cdict['Conference'] = conference
         response = self.send_action(cdict)
         return response
 
     def sipnotify(self, channel,variable):
+        """ Send SIPnotify to phone on 'channel'. 'variable' should contain
+at least one name=value pair, for example 'event=check-sync' which will reboot
+many phones, causing them to check/reload their provisioning. """
         cdict = {'Action': 'SIPnotify'}
         cdict['Channel']  = channel
         cdict['Variable'] = variable
