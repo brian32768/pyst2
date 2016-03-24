@@ -686,6 +686,22 @@ class Manager(object):
         response = self.send_action(cdict)
         return response
 
+    def confbridge_kick(self, conference, channel):
+        """ Kick a channel out of a conference. """
+        cdict = {'Action': 'ConfbridgeKick'}
+        cdict['Conference'] = conference
+        cdict['Channel'] = channel
+        response = self.send_action(cdict)
+        return response
+
+    def confbridge_unmute(self, conference, channel):
+        """ Unmute a channel in a conference. """
+        cdict = {'Action': 'ConfbridgeUnmute'}
+        cdict['Conference'] = conference
+        cdict['Channel'] = channel
+        response = self.send_action(cdict)
+        return response
+
     def sipnotify(self, channel,variable):
         """ Send SIPnotify to phone on 'channel'. 'variable' should contain
 at least one name=value pair, for example 'event=check-sync' which will reboot
@@ -693,8 +709,6 @@ many phones, causing them to check/reload their provisioning. """
         cdict = {'Action': 'SIPnotify'}
         cdict['Channel']  = channel
         cdict['Variable'] = variable
-        response = self.send_action(cdict)
-        return response
 
 class ManagerException(Exception):
     pass
