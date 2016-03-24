@@ -678,6 +678,13 @@ class Manager(object):
         response = self.send_action(cdict)
         return response
 
+    def sipnotify(self, channel,variable):
+        cdict = {'Action': 'SIPnotify'}
+        cdict['Channel']  = channel
+        cdict['Variable'] = variable
+        response = self.send_action(cdict)
+        return response
+
     def confbridge_list(self, conference=0):
         cdict = {'Action': 'ConfbridgeList'}
         cdict['Conference'] = conference
